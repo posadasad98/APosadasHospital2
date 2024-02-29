@@ -1,0 +1,51 @@
+﻿@model ML.Hospital
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h1 class="text-center">Lista de Hospitales</h1>
+    <h5>Seleccione agregar para insertar un nuevo hospital</h5>
+    <hr/>
+</div>
+
+<div>
+    <p align="right"><a class="btn btn-success"> AGREGAR HOSPITAL</a> </p>
+</div>
+
+@if (Model == null)
+{
+    <div class="alert alert-warning" role="alert">
+        Ocurrio Error!
+    </div>
+}
+
+else
+{
+    <table class="table table-striped" id="tabla">
+        <thead>
+            <tr class="text-center">
+                <th>EDITAR</th>
+                <th><i class="fa-brands fa-ideal" style="color: #000000;"></i>IdHospital</th>
+                <th><i class="fa-solid fa-at" style="color: #000000;"></i>Nombre</th>
+                <th><i class="fa-solid fa-calendar-days" style="color: #000000;"></i>AñoDeConstruccion</th>
+                <th><i class="fa-solid fa-stethoscope" style="color: #000000;"></i>Especialidad</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ML.Hospital hospital in Model.Hospitales)
+            {
+                <tr class="text-center">
+                    <td><a href="@Url.Action("Form","Hospital", new {IdHospital = hospital.IdHospital} )" class="btn btn-dark"><i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i></a></td>
+                    <td>@hospital.IdHospital</td>
+                    <td>@hospital.Nombre</td>
+                    <td>@hospital.AniodeConstruccion</td>
+                    <td>@hospital.Especialidad.IdEspecialidad</td>
+                    <td><a href="@Url.Action("Delete","Hospital", new {IdHospital = hospital.IdHospital} )" class="btn btn-outline-danger"><i class="fa-regular fa-trash-can" style="color: #ff0000;"></i></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
